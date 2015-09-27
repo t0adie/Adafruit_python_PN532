@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: Adafruit-PN532
+Version: 1.0.0
+Summary: Python library for accessing a PN532 NFC breakout over a SPI connection from a Raspberry Pi, BeagleBone Black, etc.
+Home-page: https://github.com/adafruit/Adafruit_Python_PN532/
+Author: Tony DiCola
+Author-email: tdicola@adafruit.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN

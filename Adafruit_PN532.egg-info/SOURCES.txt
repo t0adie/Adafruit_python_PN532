@@ -1,0 +1,8 @@
+setup.py
+Adafruit_PN532/PN532.py
+Adafruit_PN532/__init__.py
+Adafruit_PN532.egg-info/PKG-INFO
+Adafruit_PN532.egg-info/SOURCES.txt
+Adafruit_PN532.egg-info/dependency_links.txt
+Adafruit_PN532.egg-info/requires.txt
+Adafruit_PN532.egg-info/top_level.txt

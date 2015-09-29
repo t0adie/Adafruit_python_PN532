@@ -24,6 +24,7 @@ import binascii
 import sys
 
 import sqlite3
+import MySQLdb
 
 import Adafruit_PN532 as PN532
 
@@ -136,6 +137,24 @@ class new_tag:
 	db.commit()
 	# Close the connection
 	db.close()
+
+	cnx = MySQLdb.connect("208.66.2.18", "t0ad13", "T0ad!nthehole", "hhpi_results")
+        cursor = cnx.cursor()
+
+        add_rider = ("INSERT INTO rider_info "
+             "(bib_id, fname, lname, course_id) "
+             "VALUES (%s, %s, %s, %s)")
+
+        data_rider = (bib_id, fname, lname, course_id)
+
+        # Insert the rider's information
+        cursor.execute(add_rider, data_rider)
+
+        # Commit the data to the database
+        cnx.commit()
+
+        cursor.close()
+        cnx.close()
 
 	# Write the card!
 	# First authenticate block 4.

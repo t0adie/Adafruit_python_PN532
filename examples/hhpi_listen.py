@@ -24,6 +24,7 @@ import binascii
 import sys
 
 import sqlite3
+import MySQLdb
 
 from datetime import time
 from datetime import datetime
@@ -111,7 +112,25 @@ class read_tag:
 	    db.commit()
 	    # Close the connection
 	    db.close()
-
+	    
+	    cnx = MySQLdb.connect("208.66.2.18", "t0ad13", "T0ad!nthehole", "checkpoint")
+	    cursor = cnx.cursor()
+	    
+	    add_rider = ("INSERT INTO rider_info "
+            "(bib_id, cp_id) "
+            "VALUES (%s, %s)")
+            
+            data_rider = (bib_id, 1)
+            
+            # Insert the rider's information
+            cursor.execute(add_rider, data_rider)
+            
+            # Commit the data to the database
+            cnx.commit()
+            
+            cursor.close()
+            cnx.close() 
+	    
 	    # Break out of the reading loop and instigate another
 	    break
 

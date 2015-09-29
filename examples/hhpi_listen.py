@@ -23,6 +23,8 @@
 import binascii
 import sys
 
+import PRI.GPIO as GPIO
+
 import sqlite3
 import MySQLdb
 
@@ -136,12 +138,18 @@ class read_tag:
 
 def main():
 
+    GPIO.setmode(GPIO.BCM)
+
+    GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+    print ''
+    print ''
+    print 'Press BUTTON to read tag...'
+    
     while True:
-	
-	print ''
-	print ''
-	raw_input('Press ENTER to read tag')
-	read_tag()
+        input_state = GPIO.input(17)
+        if input_state == False:
+            read_tag()
 
 if __name__ == "__main__":
     main()    

@@ -133,6 +133,8 @@ class read_tag:
             cursor.close()
             cnx.close() 
 	    
+	    print 'Press BUTTON to read tag...'
+	    
 	    # Break out of the reading loop and instigate another
 	    break
 

@@ -1,0 +1,27 @@
+import mysql.connector
+
+config = {
+  'user': 't0ad13',
+  'password': 'T0ad!nthehole',
+  'host': '208.66.2.18',
+  'database': 'hhpi_results',
+  'raise_on_warnings': True,
+}
+
+cnx = mysql.connector.connect(**config)
+cursor = cnx.cursor()
+
+add_rider = ("INSERT INTO rider_info "
+             "(bib_id, fname, lname, course_id) "
+             "VALUES (%s, %s, %s, %s)")
+
+data_rider = ('55', 'Joe', 'Blow', '100')
+
+# Insert the rider's information
+cursor.execute(add_rider, data_rider)
+
+# Commit the data to the database
+cnx.commit()
+
+cursor.close()
+cnx.close()

@@ -42,6 +42,10 @@ from hhpi_registration import register
 t = datetime.now() - timedelta(hours=9)
 s = t.strftime("%H:%M:%S")
 
+# GPIO configuration for buzzer and button
+BUTTON = 17
+BUZZER = 27
+
 # PN532 configuration for a Raspberry Pi:
 CS   = 18
 MOSI = 23
@@ -55,7 +59,7 @@ CARD_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
 
 # Number of seconds to delay after building a block.  Good for slowing down the
 # update rate to prevent flooding new blocks into the world.
-MAX_UPDATE_SEC = 2
+MAX_UPDATE_SEC = 1
 
 # Create and initialize an instance of the PN532 class.
 pn532 = PN532.PN532(cs=CS, sclk=SCLK, mosi=MOSI, miso=MISO)
@@ -90,6 +94,11 @@ class read_tag:
 	    if data[0:4] != 'HHHH':
 	        print 'This tag has not been registered as a Hilly Hundred 2015 rider!'
 	        continue
+            # Make the RPi beep to indicate a card has been detected
+            GPIO.output(BUZZER,True)
+            time.sleep(0.1)
+            GPIO.output(BUZZER,False)
+	    
 	    # Parse out the rider's bib number and course selection.
 	    bib_id = data[4]
 	    course_id = data[5]
@@ -144,14 +153,15 @@ def main():
 
     GPIO.setmode(GPIO.BCM)
 
-    GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(BUZZER, GPIO.OUT)
 
     print ''
     print ''
     print 'Press BUTTON to read tag...'
     
     while True:
-        input_state = GPIO.input(17)
+        input_state = GPIO.input(BUTTON)
         if input_state == False:
             read_tag()
 

@@ -23,7 +23,7 @@
 import binascii
 import sys
 
-import PRI.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 import sqlite3
 import MySQLdb
@@ -115,14 +115,14 @@ class read_tag:
 	    # Close the connection
 	    db.close()
 	    
-	    cnx = MySQLdb.connect("208.66.2.18", "t0ad13", "T0ad!nthehole", "checkpoint")
+	    cnx = MySQLdb.connect("208.66.2.18", "t0ad13", "T0ad!nthehole", "hhPi_results")
 	    cursor = cnx.cursor()
 	    
-	    add_rider = ("INSERT INTO rider_info "
-            "(bib_id, cp_id) "
-            "VALUES (%s, %s)")
+	    add_rider = ("INSERT INTO checkpoint "
+            "(bib_id, cp_id, cp_tin) "
+            "VALUES (%s, %s, %s)")
             
-            data_rider = (bib_id, 1)
+            data_rider = (bib_id, 1, s)
             
             # Insert the rider's information
             cursor.execute(add_rider, data_rider)

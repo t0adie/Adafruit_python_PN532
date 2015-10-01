@@ -55,7 +55,7 @@ SCLK = 25
 # Configure the key to use for writing to the MiFare card.  You probably don't
 # need to change this from the default below unless you know your card has a
 # different key associated with it.
-CARD_KEY = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
+CARD_KEY = [0x04, 0xB3, 0x2D, 0x2A, 0x76, 0x3C, 0x80]
 
 # Number of seconds to delay after building a block.  Good for slowing down the
 # update rate to prevent flooding new blocks into the world.
